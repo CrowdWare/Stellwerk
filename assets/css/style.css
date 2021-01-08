@@ -1,0 +1,9 @@
+body {
+    position: relative;
+    z-index: auto;
+    background-attachment: fixed;
+    background-position: center center;
+    background-image: url("./assets/images/background.jpg");
+    position: relative;
+    background-size: cover;	
+}
