@@ -1,9 +1,69 @@
-body {
+
+html, body 
+{
+    margin: 0;
+    padding: 0;
     position: relative;
     z-index: auto;
     background-attachment: fixed;
     background-position: center center;
-    background-image: url("./assets/images/background.jpg");
+    background-image: url("../images/background.jpg");
     position: relative;
     background-size: cover;	
+}
+
+* 
+{
+    box-sizing: border-box;
+}
+
+.slider 
+{
+    width: 80%;
+    margin: 100px auto;
+}
+
+.slick-slide 
+{
+    margin: 0px 20px;
+}
+
+.slick .slide 
+{
+    width: 200px;
+    height: 100px;
+    padding: 1rem;
+    border: 1px solid #808080;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.slick-slide img 
+{
+    width: 100%;
+}
+
+.slick-prev:before,
+.slick-next:before 
+{
+    color: black;
+}
+
+
+.slick-slide 
+{
+    transition: all ease-in-out .3s;
+    opacity: .2;
+}
+    
+.slick-active 
+{
+    opacity: .5;
+}
+
+.slick-current 
+{
+    opacity: 1;
 }
