@@ -42,12 +42,13 @@ foreach($entries as $entry)
                     {
                         $description = parse_ini_file($filespath."/".$file);
                         $image = $description["image"];
+                        $thumbnail = $description["thumbnail"];
                         $width = $description["width"];
                         $height = $description["height"];
                         
                         echo '<div class="'.$sentry.'">';
                         echo '<a class="d-block mb-4" data-fancybox="images" href="'.$image.'" data-width="'.$width.'" data-height="'.$height.'">';
-                        echo '<img class="img-fluid" src="'.$image.'">';
+                        echo '<img class="img-fluid" src="'.$thumbnail.'">';
                         echo '</a>';
                         echo '</div>';
                         
