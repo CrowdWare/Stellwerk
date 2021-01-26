@@ -41,17 +41,27 @@ foreach($entries as $entry)
                     if(!is_dir($filespath."/".$file) && endsWith($file, ".ini"))
                     {
                         $description = parse_ini_file($filespath."/".$file);
-                        $image = $description["image"];
-                        $thumbnail = $description["thumbnail"];
-                        $width = $description["width"];
-                        $height = $description["height"];
-                        
+                        $type = $description["type"];
+                        if($type == "image")
+                        {
+                          $image = $description["image"];
+                          $thumbnail = $description["thumbnail"];
+                          $width = $description["width"];
+                          $height = $description["height"];
+                          
+                          echo '<div class="'.$sentry.'">';
+                          echo '<a class="d-block mb-4" data-fancybox="images" href="'.$image.'" data-width="'.$width.'" data-height="'.$height.'">';
+                          echo '<img class="img-fluid" src="'.$thumbnail.'">';
+                          echo '</a>';
+                          echo '</div>';  
+                      }
+                      elseif($type == "html")
+                      {
+                        $text = $description["html"];
                         echo '<div class="'.$sentry.'">';
-                        echo '<a class="d-block mb-4" data-fancybox="images" href="'.$image.'" data-width="'.$width.'" data-height="'.$height.'">';
-                        echo '<img class="img-fluid" src="'.$thumbnail.'">';
-                        echo '</a>';
+                        echo $text;
                         echo '</div>';
-                        
+                      }
                     }
                 }
             }
