@@ -10,7 +10,6 @@
 </head>
  <body>
     <h1>Stellwerk</h1>
-
     
 <?php
 function endsWith( $haystack, $needle ) {
@@ -29,13 +28,26 @@ foreach($entries as $entry)
 {
     if(is_dir($path."/".$entry) && $entry != "." && $entry != "..")
     {
+        echo '<h2>'.$entry.'</h2>'.PHP_EOL;
+        echo '<div class="slick-buttons">'.PHP_EOL;
+        echo '<a href="#" class="filter-btn'.$entry.' active" data-attribute="all">All Slides</a>'.PHP_EOL;
+
         $subcategories = $path."/".$entry;
         $subs = scandir($subcategories);
         foreach($subs as $sentry)
         {
+          if(is_dir($subcategories."/".$sentry) && $sentry != "." && $sentry != "..")
+          {
+            echo '<a href="#" class="filter-btn'.$entry.'" data-attribute="'.$sentry.'">'.$sentry.'</a>'.PHP_EOL;
+          }
+        }
+        echo '</div>'.PHP_EOL;
+        echo '<section class="'. $entry.' slider">'.PHP_EOL;
+        foreach($subs as $sentry)
+        {
             if(is_dir($subcategories."/".$sentry) && $sentry != "." && $sentry != "..")
             {
-                echo '<section class="'. $sentry.' slider">'.PHP_EOL;
+                
                 $filespath = $path."/".$entry."/".$sentry;
                 $files = scandir($filespath);
                 foreach($files as $file)
@@ -51,7 +63,7 @@ foreach($entries as $entry)
                           $width = $description["width"];
                           $height = $description["height"];
                           
-                          echo '<div class="wood">'.PHP_EOL;
+                          echo '<div class="'.$sentry.'">'.PHP_EOL;
                           echo '<a class="d-block mb-4" data-fancybox="images" href="'.$image.'" data-width="'.$width.'" data-height="'.$height.'">'.PHP_EOL;
                           echo '<img class="img-fluid" src="'.$thumbnail.'">'.PHP_EOL;
                           echo '</a>'.PHP_EOL;
@@ -64,7 +76,7 @@ foreach($entries as $entry)
                           $width = $description["width"];
                           $height = $description["height"];
                           
-                          echo '<div class="wood">'.PHP_EOL;
+                          echo '<div class="'.$sentry.'">'.PHP_EOL;
                           echo '<a class="d-block mb-4" data-fancybox data-ratio="2" href="'.$video.'" data-width="'.$width.'" data-height="'.$height.'">'.PHP_EOL;
                           echo '<img class="img-fluid" src="'.$thumbnail.'">'.PHP_EOL;
                           echo '</a>'.PHP_EOL;
@@ -75,8 +87,7 @@ foreach($entries as $entry)
                         $preview = $description["preview"];
                         $html = $description["html"];
                         
-
-                        echo '<div class="card p-lg-3">'.PHP_EOL;
+                        echo '<div class="'.$sentry.'">'.PHP_EOL;
                         echo '  <div class="card-body">'.PHP_EOL;
                         echo '    <p class="card-text">'.PHP_EOL;
                         echo $preview.PHP_EOL;
@@ -93,11 +104,13 @@ foreach($entries as $entry)
                       }
                     }
                 }
-                echo '</section>'.PHP_EOL;
+                
             }
         }
+        echo '</section>'.PHP_EOL;
     }
 }
+// to be rendered outside of the slides section
 echo $hiddenDialogs.PHP_EOL;
 ?>
     
@@ -113,63 +126,55 @@ foreach($entries as $entry)
 {
   if(is_dir($path."/".$entry) && $entry != "." && $entry != "..")
   {
-    $subcategories = $path."/".$entry;
-    $subs = scandir($subcategories);
-    foreach($subs as $sentry)
-    {
-        if(is_dir($subcategories."/".$sentry) && $sentry != "." && $sentry != "..")
-        {
-          echo '  $(".'.$sentry.'").slick({'.PHP_EOL;
-          echo '    dots: true,'.PHP_EOL;
-          echo '    infinite: false,'.PHP_EOL;
-          echo '    centerMode: true,'.PHP_EOL;
-          echo '    slidesToShow: 1,'.PHP_EOL;
-          echo '    slidesToScroll: 1,'.PHP_EOL;
-          echo '    mobileFirst: true,'.PHP_EOL;
-          echo '    focusOnSelect: false,'.PHP_EOL;
-          echo '    responsive: '.PHP_EOL;
-          echo '    ['.PHP_EOL;
-          echo '      {'.PHP_EOL;
-          echo '        breakpoint:769,'.PHP_EOL;
-          echo '        settings: {slidesToShow:1}'.PHP_EOL;
-          echo '      },'.PHP_EOL;
-          echo '      {'.PHP_EOL;
-          echo '        breakpoint:993,'.PHP_EOL;
-          echo '        settings: {slidesToShow:2}'.PHP_EOL;
-          echo '      },'.PHP_EOL;
-          echo '      {'.PHP_EOL;
-          echo '        breakpoint:1000,'.PHP_EOL;
-          echo '        settings: {slidesToShow:3}'.PHP_EOL;
-          echo '      },'.PHP_EOL;
-          echo '    ]'.PHP_EOL;
-          echo '  });'.PHP_EOL;
-        }
-    }
+    echo '  $(".'.$entry.'").slick({'.PHP_EOL;
+    echo '    dots: true,'.PHP_EOL;
+    echo '    infinite: false,'.PHP_EOL;
+    echo '    centerMode: true,'.PHP_EOL;
+    echo '    slidesToShow: 3,'.PHP_EOL;
+    echo '    slidesToScroll: 1,'.PHP_EOL;
+    echo '    focusOnSelect: false,'.PHP_EOL;
+    echo '    responsive: '.PHP_EOL;
+    echo '    ['.PHP_EOL;
+    echo '      {'.PHP_EOL;
+    echo '        breakpoint:769,'.PHP_EOL;
+    echo '        settings: {slidesToShow:1}'.PHP_EOL;
+    echo '      },'.PHP_EOL;
+    echo '      {'.PHP_EOL;
+    echo '        breakpoint:993,'.PHP_EOL;
+    echo '        settings: {slidesToShow:2}'.PHP_EOL;
+    echo '      },'.PHP_EOL;
+    echo '      {'.PHP_EOL;
+    echo '        breakpoint:1000,'.PHP_EOL;
+    echo '        settings: {slidesToShow:3}'.PHP_EOL;
+    echo '      },'.PHP_EOL;
+    echo '    ]'.PHP_EOL;
+    echo '  });'.PHP_EOL;
+    echo ''.PHP_EOL;
+
+    echo '  $(".filter-btn'.$entry.'").on("click",function()'.PHP_EOL;
+    echo '  {'.PHP_EOL;
+    echo '    $(".filter-btn'.$entry.'").removeClass("active");'.PHP_EOL;
+    echo '    var filter'.$entry.' = $(this).data("attribute");'.PHP_EOL;
+    echo '    if(filter'.$entry.' == "all")'.PHP_EOL;
+    echo '    {'.PHP_EOL;
+    echo '      $(".'.$entry.'").slick("slickUnfilter");'.PHP_EOL;
+    echo '    }'.PHP_EOL;
+    echo '    else'.PHP_EOL;
+    echo '    {'.PHP_EOL;
+    echo '      $(".'.$entry.'").slick("slickUnfilter");'.PHP_EOL;
+    echo '      $(".'.$entry.'").slick("slickFilter", function( index )'.PHP_EOL; 
+    echo '      {'.PHP_EOL;
+    echo '        return $("." + filter'.$entry.', this).length === 1;'.PHP_EOL;
+    echo '      });'.PHP_EOL;
+    echo '    }'.PHP_EOL;
+    echo '    $(this).addClass("active");'.PHP_EOL;
+    echo '  });'.PHP_EOL;
+    echo ''.PHP_EOL;
   }
 }
 ?>
 });
 
-var filtered = false;
-$('.filter-btn').on('click',function()
-{
-  $('.filter-btn').removeClass('active');
-  var filter = $(this).data('attribute');
-  if(filter == 'all')
-  {
-    $('.filtering').slick('slickUnfilter');
-  }
-  else
-  {
-    $('.filtering').slick('slickUnfilter');
-    $('.filtering').slick('slickFilter', function( index ) 
-    {
-      return $('.' + filter, this).length === 1;
-    });
-  }
-  $(this).addClass('active');
-  filtered = true;
-});
 </script>
  </body>
 </html>
