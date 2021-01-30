@@ -29,7 +29,7 @@ foreach($entries as $entry)
     if(is_dir($path."/".$entry) && $entry != "." && $entry != "..")
     {
         $catName = str_replace(' ', '_', $entry);
-        echo '<h2>'.$entry.'</h2>'.PHP_EOL;
+        echo '<h2>'.substr($entry, 4).'</h2>'.PHP_EOL;
         echo '<div class="slick-buttons">'.PHP_EOL;
         echo '<a href="javascript:void(0)" class="filter-btn'.$catName.' active" data-attribute="all">All Slides</a>'.PHP_EOL;
 
