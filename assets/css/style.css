@@ -49,8 +49,8 @@ html, body
 .slick-next:before 
 {
     color: black;
+    font-size: 40px;
 }
-
 
 .slick-slide 
 {

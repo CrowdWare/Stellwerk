@@ -28,9 +28,10 @@ foreach($entries as $entry)
 {
     if(is_dir($path."/".$entry) && $entry != "." && $entry != "..")
     {
+        $catName = str_replace(' ', '_', $entry);
         echo '<h2>'.$entry.'</h2>'.PHP_EOL;
         echo '<div class="slick-buttons">'.PHP_EOL;
-        echo '<a href="#" class="filter-btn'.$entry.' active" data-attribute="all">All Slides</a>'.PHP_EOL;
+        echo '<a href="javascript:void(0)" class="filter-btn'.$catName.' active" data-attribute="all">All Slides</a>'.PHP_EOL;
 
         $subcategories = $path."/".$entry;
         $subs = scandir($subcategories);
@@ -38,11 +39,11 @@ foreach($entries as $entry)
         {
           if(is_dir($subcategories."/".$sentry) && $sentry != "." && $sentry != "..")
           {
-            echo '<a href="#" class="filter-btn'.$entry.'" data-attribute="'.$sentry.'">'.$sentry.'</a>'.PHP_EOL;
+            echo '<a href="javascript:void(0)" class="filter-btn'.$catName.'" data-attribute="'.$sentry.'">'.$sentry.'</a>'.PHP_EOL;
           }
         }
         echo '</div>'.PHP_EOL;
-        echo '<section class="'. $entry.' slider">'.PHP_EOL;
+        echo '<section class="'.$catName.' slider">'.PHP_EOL;
         foreach($subs as $sentry)
         {
             if(is_dir($subcategories."/".$sentry) && $sentry != "." && $sentry != "..")
@@ -124,9 +125,10 @@ $(document).on('ready', function()
 <?php
 foreach($entries as $entry)
 {
+  $catName = str_replace(' ', '_', $entry);
   if(is_dir($path."/".$entry) && $entry != "." && $entry != "..")
   {
-    echo '  $(".'.$entry.'").slick({'.PHP_EOL;
+    echo '  $(".'.$catName.'").slick({'.PHP_EOL;
     echo '    dots: true,'.PHP_EOL;
     echo '    infinite: false,'.PHP_EOL;
     echo '    centerMode: true,'.PHP_EOL;
@@ -151,20 +153,20 @@ foreach($entries as $entry)
     echo '  });'.PHP_EOL;
     echo ''.PHP_EOL;
 
-    echo '  $(".filter-btn'.$entry.'").on("click",function()'.PHP_EOL;
+    echo '  $(".filter-btn'.$catName.'").on("click",function()'.PHP_EOL;
     echo '  {'.PHP_EOL;
-    echo '    $(".filter-btn'.$entry.'").removeClass("active");'.PHP_EOL;
-    echo '    var filter'.$entry.' = $(this).data("attribute");'.PHP_EOL;
-    echo '    if(filter'.$entry.' == "all")'.PHP_EOL;
+    echo '    $(".filter-btn'.$catName.'").removeClass("active");'.PHP_EOL;
+    echo '    var filter'.$catName.' = $(this).data("attribute");'.PHP_EOL;
+    echo '    if(filter'.$catName.' == "all")'.PHP_EOL;
     echo '    {'.PHP_EOL;
-    echo '      $(".'.$entry.'").slick("slickUnfilter");'.PHP_EOL;
+    echo '      $(".'.$catName.'").slick("slickUnfilter");'.PHP_EOL;
     echo '    }'.PHP_EOL;
     echo '    else'.PHP_EOL;
     echo '    {'.PHP_EOL;
-    echo '      $(".'.$entry.'").slick("slickUnfilter");'.PHP_EOL;
-    echo '      $(".'.$entry.'").slick("slickFilter", function( index )'.PHP_EOL; 
+    echo '      $(".'.$catName.'").slick("slickUnfilter");'.PHP_EOL;
+    echo '      $(".'.$catName.'").slick("slickFilter", function( index )'.PHP_EOL; 
     echo '      {'.PHP_EOL;
-    echo '        return $("." + filter'.$entry.', this).length === 1;'.PHP_EOL;
+    echo '        return $("." + filter'.$catName.', this).length === 1;'.PHP_EOL;
     echo '      });'.PHP_EOL;
     echo '    }'.PHP_EOL;
     echo '    $(this).addClass("active");'.PHP_EOL;
