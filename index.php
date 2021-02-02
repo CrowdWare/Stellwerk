@@ -139,8 +139,8 @@ foreach($entries as $entry)
     echo '    slidesToShow: 3,'.PHP_EOL;
     echo '    infinite: true,'.PHP_EOL;
     echo '    slidesToScroll: 1,'.PHP_EOL;
+    echo '    arrows: false,'.PHP_EOL;
     echo '    focusOnSelect: false,'.PHP_EOL;
-    echo '    draggable: true,'.PHP_EOL;
     echo '    responsive: '.PHP_EOL;
     echo '    ['.PHP_EOL;
     echo '      {'.PHP_EOL;
@@ -149,7 +149,7 @@ foreach($entries as $entry)
     echo '      },'.PHP_EOL;
     echo '      {'.PHP_EOL;
     echo '        breakpoint:993,'.PHP_EOL;
-    echo '        settings: {slidesToShow:2}'.PHP_EOL;
+    echo '        settings: {slidesToShow:1}'.PHP_EOL;
     echo '      },'.PHP_EOL;
     echo '      {'.PHP_EOL;
     echo '        breakpoint:1000,'.PHP_EOL;
