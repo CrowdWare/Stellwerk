@@ -63,8 +63,10 @@ foreach($entries as $entry)
                           $thumbnail = $description["thumbnail"];
                           $width = $description["width"];
                           $height = $description["height"];
+                          $headline = $description["headline"];
                           
                           echo '<div class="'.$sentry.'">'.PHP_EOL;
+                          echo '<h4>'.$headline.'</h4>'.PHP_EOL;
                           echo '<a class="d-block mb-4" data-fancybox="images" href="'.$image.'" data-width="'.$width.'" data-height="'.$height.'">'.PHP_EOL;
                           echo '<img class="img-fluid" src="'.$thumbnail.'">'.PHP_EOL;
                           echo '</a>'.PHP_EOL;
@@ -76,8 +78,10 @@ foreach($entries as $entry)
                           $thumbnail = $description["thumbnail"];
                           $width = $description["width"];
                           $height = $description["height"];
+                          $headline = $description["headline"];
                           
                           echo '<div class="'.$sentry.'">'.PHP_EOL;
+                          echo '<h4>'.$headline.'</h4>'.PHP_EOL;
                           echo '<a class="d-block mb-4" data-fancybox data-ratio="2" href="'.$video.'" data-width="'.$width.'" data-height="'.$height.'">'.PHP_EOL;
                           echo '<img class="img-fluid" src="'.$thumbnail.'">'.PHP_EOL;
                           echo '</a>'.PHP_EOL;
@@ -130,11 +134,13 @@ foreach($entries as $entry)
   {
     echo '  $(".'.$catName.'").slick({'.PHP_EOL;
     echo '    dots: true,'.PHP_EOL;
-    echo '    infinite: false,'.PHP_EOL;
     echo '    centerMode: true,'.PHP_EOL;
+    echo "    centerPadding: '30px',".PHP_EOL;
     echo '    slidesToShow: 3,'.PHP_EOL;
+    echo '    infinite: true,'.PHP_EOL;
     echo '    slidesToScroll: 1,'.PHP_EOL;
     echo '    focusOnSelect: false,'.PHP_EOL;
+    echo '    draggable: true,'.PHP_EOL;
     echo '    responsive: '.PHP_EOL;
     echo '    ['.PHP_EOL;
     echo '      {'.PHP_EOL;

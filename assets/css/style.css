@@ -96,3 +96,14 @@ html, body
 {
     opacity: 1;
 }
+
+.slick-center
+{
+    -moz-transform:scale(1.08);
+    -ms-transform:scale(1.08);
+    -o-transform:scale(1.08);
+    -webkit-transform:scale(1.08);
+    color:#1b7e29;
+    opacity:1;
+    transform:scale(1.08);
+}
